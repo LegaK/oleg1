@@ -17,7 +17,7 @@ private $db_pdo;
 
     function getData($table)
     {
-        $query = $this->db_pdo->prepare('SELECT * FROM '.$table. ' LIMIT 100');
+        $query = $this->db_pdo->prepare('SELECT * FROM '.$table);
         $query->execute();
         return $query->fetchAll();
     }
@@ -25,8 +25,11 @@ private $db_pdo;
         var_dump($this->getData($table));
     }
     function update_date_changed($table){
-       $query= $this->db_pdo->prepare('UPDATE '.$table.
-            ' SET DATE_TIME_CHANGED = CURRENT_TIMESTAMP()');
+       $query= $this->db_pdo->prepare('
+       LOCK TABLES '.$table.' WRITE;
+       UPDATE '.$table.
+            ' SET DATE_TIME_CHANGED = CURRENT_TIMESTAMP();
+            UNLOCK TABLES');
         return $query->execute();
     }
 
