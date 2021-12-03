@@ -3,13 +3,15 @@
 
 class ConnectClass
 {
+    //настройки подключения к бд
 private $host = '127.0.0.1';
 private $db_name = 'oleg_test';
 private $db_username = 'root';
 private $db_password = '';
 private $pdo;
-    function __construct($pdo)
+    function __construct()
     {
+        //попытка подключения, charset=utf8 для вывода русских букв
         try
         {
             $this->pdo = new PDO('mysql:host='. $this->host .'; charset=utf8; dbname='.
@@ -22,6 +24,7 @@ private $pdo;
         }
     }
 
+    //возврат подключения к бд
     function get_pdo(){
         return $this->pdo;
     }

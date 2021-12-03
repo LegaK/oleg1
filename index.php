@@ -1,18 +1,10 @@
 ﻿<?php
-require_once "Threads.php";
-$first= new FirstThreads();
-$first->view_first_select();
-$first->update_first_table();
-echo '<br/>';
-$second= new SecondThreads();
-$second->view_second_select();
-echo '<br/>';
-$third= new ThirdThreads();
-$third->view_third_select();
-echo '<br/>';
-$fourth = new FourthThreads();
-$fourth->view_fourth_select();
-echo '<br/>';
-$fifth= new FifthThreads();
-$fifth->view_fifth_select();
+//список названий файлов для запуска скриптов
+$scripts=['FirstThread','SecondThread','ThirdThread','FourthThread','FifthThread'];
+
+//запуск через cmd. 2>&1 & чтобы не ждать завершения процесса
+foreach ($scripts as $script){
+    echo $script.' is runned<br/>';
+    exec("php ".__DIR__."\\thread_files\\". $script . '.php 2>&1 &');
+}
 ?>
