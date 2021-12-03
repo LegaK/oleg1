@@ -20,4 +20,4 @@ class FifthThreads extends TemplateThreads {
 }
 
 $fifth =new FifthThreads();
-$fifth->update_date_changed();
+$fifth->update_fifth_table();
